@@ -1,4 +1,4 @@
-# The Datamodel
+# The Data model
 
 class Place:
     def __init__(self, name, weather,language, veiw, sound):

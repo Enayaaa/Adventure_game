@@ -22,20 +22,6 @@ p = player.Player(0, 0)
 
 run = 1
 
-print()
-print("𝕎𝕖𝕝𝕔𝕠𝕞𝕖 𝕥𝕠 𝕋𝕙𝕚𝕤 𝕒𝕕𝕧𝕖𝕟𝕥𝕦𝕣𝕖 𝕘𝕒𝕞𝕖!")
-print("_________________________________________")
-print("Ｕｓｅ ｔｈｅ ｆｏｌｌｏｗｉｎｇ ｃｏｍｍａｎｄｓ ｔｏ ｅｘｐｌｏｒｅ ｔｈｅ ｗｏｒｌｄ：")
-print(
-    "w - move up\ns - move down\na - move left\nd - move right\nlook - explore the current place"
-    "\nlisten - listen for sounds\ndestroy - destroy building at current place"
-    "\nitems - list items at current place\ninventory - list items in inventory"
-    "\nplace item [index] - place item at index from inventory at place"
-    "\npickup item [index] - pickup item at index from item into inventory"
-    "\nquit - quit game"
-)
-print("_________________________________________")
-
 
 def handle_event():
     for event in pygame.event.get():
@@ -65,7 +51,21 @@ def handle_event():
         p.move(command)
 
 
-# Main program loop
+# Main program
+print()
+print("𝕎𝕖𝕝𝕔𝕠𝕞𝕖 𝕥𝕠 𝕋𝕙𝕚𝕤 𝕒𝕕𝕧𝕖𝕟𝕥𝕦𝕣𝕖 𝕘𝕒𝕞𝕖!")
+print("_________________________________________")
+print("Ｕｓｅ ｔｈｅ ｆｏｌｌｏｗｉｎｇ ｃｏｍｍａｎｄｓ ｔｏ ｅｘｐｌｏｒｅ ｔｈｅ ｗｏｒｌｄ：")
+print(
+    "w - move up\ns - move down\na - move left\nd - move right\nlook - explore the current place"
+    "\nlisten - listen for sounds\ndestroy - destroy building at current place"
+    "\nitems - list items at current place\ninventory - list items in inventory"
+    "\nplace item [index] - place item at index from inventory at place"
+    "\npickup item [index] - pickup item at index from item into inventory"
+    "\nquit - quit game"
+)
+print("_________________________________________")
+
 while run:
     print()
     print("Current place %s (%d, %d)" % (p.get_place_name(w.places), p.x, p.y))
