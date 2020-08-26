@@ -1,20 +1,7 @@
 import world
 import player
 import sys
-import pygame
 
-# Initialize PyGame
-pygame.init()
-
-size = width, height = 600, 800
-white = 255, 255, 255
-
-screen = pygame.display.set_mode(size)
-pygame.display.set_caption('Adventure Game')
-pygame.mouse.set_visible(1)
-
-clock = pygame.time.Clock()
-FPS = 60
 
 # Initialize Game Variables
 w = world.World()
@@ -24,11 +11,7 @@ run = 1
 
 
 def handle_event():
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
-
-    command = ""    # input().lower()
+    command = input().lower()
 
     if command == "quit":
         global run
@@ -70,8 +53,6 @@ while run:
     print()
     print("Current place %s (%d, %d)" % (p.get_place_name(w.places), p.x, p.y))
 
-    clock.tick(FPS)
-
     # Handle commands
     handle_event()
 
@@ -84,10 +65,3 @@ while run:
         p.y = len(w.places[0]) - 1
     if p.y > len(w.places[0]) - 1:
         p.y = 0
-
-    # Draw
-    screen.fill(white)
-    pygame.display.update()
-    pygame.display.flip()
-
-pygame.quit()
