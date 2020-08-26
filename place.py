@@ -7,3 +7,5 @@ class Place:
         self.language = language
         self.veiw = veiw
         self.sound = sound
+        self.building = "big house"
+        self.items = []

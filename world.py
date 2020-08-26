@@ -13,3 +13,7 @@ class World:
         self.places[1].append(place.Place("North East", "chilly", "Swedish", "small bushes", "wind howling"))
         self.places[0].append(place.Place("South West", "sunny", "Spanish", "green trees", "birds chirping"))
         self.places[1].append(place.Place("South East", "flaming hot", "Persian", "desert", "vultures calling"))
+
+    def destroy_build(self, x, y):
+        self.places[x][y].building = "ruin"
+        return "Building at sight has been destroyed."
