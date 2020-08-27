@@ -6,15 +6,22 @@ import pygame
 # Initialize PyGame
 pygame.init()
 
-size = width, height = 600, 800
-white = 255, 255, 255
+SIZE = width, height = 800, 600
+WHITE = 255, 255, 255
+BLACK = 0, 0, 0
 
-screen = pygame.display.set_mode(size)
+WIN = pygame.display.set_mode(SIZE)
 pygame.display.set_caption('Adventure Game')
 pygame.mouse.set_visible(1)
 
 clock = pygame.time.Clock()
 FPS = 60
+
+TITLE_FONT = pygame.font.SysFont("Consolas", 40, 1)
+NORMAL_FONT = pygame.font.SysFont("Consolas", 20)
+
+house_pic = pygame.image.load("pics/house.png")
+house_broken_pic = pygame.image.load("pics/house_broken.png")
 
 # Initialize Game Variables
 w = world.World()
@@ -27,6 +34,20 @@ def handle_event():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                p.move("w")
+            if event.key == pygame.K_s:
+                p.move("s")
+            if event.key == pygame.K_a:
+                p.move("a")
+            if event.key == pygame.K_d:
+                p.move("d")
+            if event.key == pygame.K_l:
+                w.destroy_build(p.x, p.y)
+        if event.type == pygame.KEYUP:
+            print
+            'stop'
 
     command = ""    # input().lower()
 
@@ -67,8 +88,8 @@ print(
 print("_________________________________________")
 
 while run:
-    print()
-    print("Current place %s (%d, %d)" % (p.get_place_name(w.places), p.x, p.y))
+    # print()
+    # print("Current place %s (%d, %d)" % (p.get_place_name(w.places), p.x, p.y))
 
     clock.tick(FPS)
 
@@ -85,9 +106,25 @@ while run:
     if p.y > len(w.places[0]) - 1:
         p.y = 0
 
+    # Update
+
+
     # Draw
-    screen.fill(white)
-    pygame.display.update()
+    WIN.fill(WHITE)
+
+    place_name = TITLE_FONT.render(w.places[p.x][p.y].name, 1, BLACK)
+    WIN.blit(place_name, (int(SIZE[0] / 2 - place_name.get_rect().width / 2), 100))
+
+    y = 170
+    for x in p.look(w.places).split("\n"):
+        place_desc = NORMAL_FONT.render(x, 1, BLACK)
+        WIN.blit(place_desc, (int(SIZE[0] / 2 - place_desc.get_rect().width / 2), y))
+        y += 20
+    if w.places[p.x][p.y].building != "ruin":
+        WIN.blit(house_pic, (int(SIZE[0]/2 - house_pic.get_rect().width/2), 350))
+    else:
+        WIN.blit(house_broken_pic, (int(SIZE[0]/2 - house_broken_pic.get_rect().width/2), 350))
+
     pygame.display.flip()
 
 pygame.quit()
